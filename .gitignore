@@ -29,12 +29,12 @@ venv/
 .venv/
 
 # === Node / React ===
-frontend/node_modules/
-frontend/build/
-frontend/dist/
-frontend/.env
-frontend/.next/
-frontend/.turbo/
+frontend/app/node_modules/
+frontend/app/build/
+frontend/app/dist/
+frontend/app/.env
+frontend/app/.next/
+frontend/app/.turbo/
 
 # === OS & IDE files ===
 *.swp
