@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Transaction
+from .models import Transaction, Category
 
 class TransactionSerializer(serializers.ModelSerializer):
     """
@@ -9,7 +9,10 @@ class TransactionSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = '__all__'  # Include all fields from the Transaction model
 
-    def validate(self, data):
-        if data['amount'] <= 0:
-            raise serializers.ValidationError("Amount must be positive.")
-        return data
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Category model.
+    """
+    class Meta:
+        model = Category
+        fields = '__all__'
