@@ -1,13 +1,14 @@
-// src/pages/TransactionsPage.jsx
 import React, { useState } from 'react';
 import TransactionList from '../components/TransactionList';
+import TransactionForm from '../components/TransactionForm';
 
 const TransactionsPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
 
   return (
     <div>
-      <TransactionList key={refreshKey} />
+        <TransactionForm key={refreshKey} />
+        <TransactionList key={refreshKey} />
     </div>
   );
 };

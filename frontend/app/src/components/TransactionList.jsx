@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getTransactions } from '../services/api'; // Adjust the import path as necessary
+import { useEffect, useState } from 'react';
+import { getTransactions } from '../services/api';
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
