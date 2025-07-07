@@ -43,9 +43,15 @@ def update_transaction(request, pk):
 
 @api_view(['GET'])
 def get_categories(request):
-    categories = Category.objects.all()
-    serializedData = CategorySerializer(categories, many=True).data
-    return Response(serializedData)
+    category_type = request.query_params.get('type')  # e.g. ?type=income
+
+    if category_type: # Filter categories by type if provided
+        categories = Category.objects.filter(type=category_type)
+    else:
+        categories = Category.objects.all()
+
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def create_category(request):
