@@ -14,4 +14,8 @@ urlpatterns = [
     path('users/create/', create_user, name='create_user'),
     path('users/update/<int:pk>', update_user, name='update_user'),
     path('users/delete/<int:pk>', delete_user, name='delete_user'),
+    path('accounts/', get_accounts, name='get_accounts'),
+    path('accounts/create/', create_accounts, name='create_accounts'),
+    path('accounts/update/<int:pk>', update_accounts, name='update_accounts'),
+    path('accounts/delete/<int:pk>', delete_accounts, name='delete_accounts'),
 ]

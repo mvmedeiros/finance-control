@@ -16,9 +16,9 @@ class Transaction(models.Model):
     description = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     type = models.CharField(choices=TRANSACTION_TYPES)
-    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)  # ForeignKey to Category model
-    user = models.ForeignKey('User', on_delete=models.CASCADE)  # ForeignKey to User model
-    account = models.CharField(max_length=255) # Assuming account is a string, could be a ForeignKey to an Account model
+    category = models.ForeignKey('Category', related_name='category', on_delete=models.SET_NULL, null=True, blank=True)  # ForeignKey to Category model
+    user = models.ForeignKey('User', related_name='user', on_delete=models.CASCADE)  # ForeignKey to User model
+    account = models.ForeignKey('Account', related_name='transactions', on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey to Account model
 
     def __str__(self):
         return f"{self.date} - {self.description} - {self.amount} - {self.category}"
@@ -63,3 +63,13 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+class Account(models.Model):
+    """
+    Model to represent an account.
+    """
+    name = models.CharField(max_length=255, unique=True)
+    balance = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+
+    def __str__(self):
+        return f"{self.name} ({self.balance})"

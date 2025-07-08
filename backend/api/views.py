@@ -125,3 +125,42 @@ def update_user(request, pk):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# --------------------------
+
+# ----- Account endpoints -----
+@api_view(['GET'])
+def get_accounts(request):
+    account = Account.objects.all()
+    serializer = AccountSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def create_account(request):
+    serializer = AccountSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_account(request, pk):
+    try:
+        account = Account.objects.get(pk=pk)
+    except account.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    account.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+def update_account(request, pk):
+    try:
+        account = Account.objects.get(pk=pk)
+    except account.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = AccountSerializer(account, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
