@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import get_transactions, create_transaction, delete_transaction, update_transaction, get_categories, create_category, update_category, delete_category, get_users, create_user, update_user, delete_user
+from .views import create_transaction, get_transactions, update_transaction, delete_transaction
+from .views import create_category, get_categories, update_category, delete_category
+from .views import create_user, get_users, update_user, delete_user
+from .views import create_account, get_accounts, update_account, delete_account
 
 urlpatterns = [
     path('transactions/', get_transactions, name='get_transactions'),
@@ -15,7 +18,7 @@ urlpatterns = [
     path('users/update/<int:pk>', update_user, name='update_user'),
     path('users/delete/<int:pk>', delete_user, name='delete_user'),
     path('accounts/', get_accounts, name='get_accounts'),
-    path('accounts/create/', create_accounts, name='create_accounts'),
-    path('accounts/update/<int:pk>', update_accounts, name='update_accounts'),
-    path('accounts/delete/<int:pk>', delete_accounts, name='delete_accounts'),
+    path('accounts/create/', create_account, name='create_account'),
+    path('accounts/update/<int:pk>', update_account, name='update_account'),
+    path('accounts/delete/<int:pk>', delete_account, name='delete_account'),
 ]

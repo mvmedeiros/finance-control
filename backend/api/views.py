@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Transaction, Category, User
-from .serializer import TransactionSerializer, CategorySerializer, UserSerializer
+from .models import Transaction, Category, User, Account
+from .serializer import TransactionSerializer, CategorySerializer, UserSerializer, AccountSerializer
 
 # ----- Transactions endpoints -----
 @api_view(['GET'])
@@ -130,8 +130,8 @@ def update_user(request, pk):
 # ----- Account endpoints -----
 @api_view(['GET'])
 def get_accounts(request):
-    account = Account.objects.all()
-    serializer = AccountSerializer(users, many=True)
+    accounts = Account.objects.all()
+    serializer = AccountSerializer(accounts, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
