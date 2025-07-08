@@ -17,7 +17,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     type = models.CharField(choices=TRANSACTION_TYPES)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)  # ForeignKey to Category model
-    user = models.CharField(max_length=255) # Assuming user is a string, could be a ForeignKey to a User model
+    user = models.ForeignKey('User', on_delete=models.CASCADE)  # ForeignKey to User model
     account = models.CharField(max_length=255) # Assuming account is a string, could be a ForeignKey to an Account model
 
     def __str__(self):
@@ -53,3 +53,13 @@ class Category(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.type})"
+
+class User(models.Model):
+    """
+    Model to represent a user.
+    """
+    username = models.CharField(max_length=255, unique=True)
+    # Authentication strategy will be implemented later, for now just a username for filtering purposes
+
+    def __str__(self):
+        return self.username
